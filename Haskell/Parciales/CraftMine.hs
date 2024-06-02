@@ -157,3 +157,22 @@ pala' bioma = obtenerMaterial (length (materialesBioma bioma) `div` 2) (material
 
 azada :: String -> Herramienta
 azada materialBuscado bioma = head (filter (\materialDelBioma -> materialBuscado == materialDelBioma) (materialesBioma bioma))
+
+-- Punto 3 
+
+desierto = UnBioma "Desierto" "Sombrero" (repeat "arena")
+steve = UnPersonaje "Steve" 100 ["madera", "Sombrero"]
+
+azul :: Personaje
+azul = minar (hacha desierto) steve desierto 
+-- no corta la ejecucion ya que si le pasamos hacha bioma (last (materialesBioma bioma)) estariamos tomando el ultimo elemento y como
+-- repeat agrega constantemente el material "arena" a la lista de elementos del bioma, no tiene fin por ende no tiene ultimo elemento
+
+azul2 :: Personaje
+azul2 = minar (espada desierto) steve desierto
+
+azul3 :: Personaje
+azul3 = minar (pico 3) steve desierto
+
+--en estos dos casos nos devolveria al personaje con el "arena" agregado a su inventario ya que haskell no necesita reccorrer toda la lista
+-- xq su forma de trabajar es lazy al decirle que retorne un valor en una posicion especifica, simplemente basta con que exista un valor en dicha posicion 
